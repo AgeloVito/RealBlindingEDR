@@ -2,7 +2,7 @@
 
 [中文介绍](README.zh_CN.md)
 
-**2024.4.1 update**
+**2024.3.13 update**
 
 Utilize arbitrary address read/write implementation with signed driver: completely blind or kill or permanently turn off AV/EDR.
 
