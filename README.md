@@ -2,11 +2,11 @@
 
 [中文介绍](README.zh_CN.md)
 
+**2024.4.1 update**
+
 Utilize arbitrary address read/write implementation with signed driver: completely blind or kill or permanently turn off AV/EDR.
 
 If you want to understand the implementation principle, you can refer to the analysis article: [AV/EDR 完全致盲 - 清除6大内核回调实现（Chinese）](https://mp.weixin.qq.com/s/ZMTjDMMdQoOczxzZ7OAGtA)
-
-For immediate utilization, this update is released:
 
 **Supports blinding/permanent shutdown: 360 Security Guard, 360 Enterprise Edition, Tianqing V10, Tencent Computer Manager, Tinder/Tinder Enterprise Edition, Kaspersky Endpoint Security, AsiaInfo EDR, Windows Defender, AnTian Zhijia.**
 
@@ -46,30 +46,36 @@ This project is not targeted at any AV/EDR manufacturers. The code examples are 
 
 ## Usage
 
-![](assets/17025416387098.jpg)
+![](assets/17101195777762.jpg)
 
-This project supports two driver applications: [dbutil_2_3.sys](https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/) (supports win7 and above versions, but the antivirus flag is relatively small More), [echo_driver.sys](https://www.loldrivers.io/drivers/afb8bb46-1d13-407d-9866-1daa7c82ca63/) (supports win10 and above versions)
+Download the exe file from Releases and do anti-virus processing (you can convert the exe into shellcode and write a shellcode loader to load it)
 
-1. Use echo_driver.sys driver for blinding:
+This project currently supports 4 types of driver applications (corresponding to the corresponding application numbers):
+1. [echo_driver.sys](https://www.loldrivers.io/drivers/afb8bb46-1d13-407d-9866-1daa7c82ca63/) (support win10+)
+
+2. [dbutil_2_3.sys](https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/) (support win7+)
+
+3. wnBio.sys (supports Windows Version 6.3+)
+
+4. [GPU-Z.sys](https://github.com/huoji120/Antivirus_R3_bypass_demo)(only supports Windows Version 6.1)
+
+**example:**
+
+1. Use the echo_driver.sys driver for blinding:
 	
     `RealBlindingEDR.exe c:\echo_driver.sys 1`
+
+2. Use the wnBio.sys driver to permanently remove the anti-virus software (essentially renaming the key files of the anti-virus software):
 	
-2. Use the dbutil_2_3.sys driver for blinding:
-	
-    `RealBlindingEDR.exe c:\dbutil_2_3.sys 2`
+    `RealBlindingEDR.exe c:\wnBio.sys 3 clear`
+    ![](assets/17101218451880.jpg)
+    
 
-After the program execution is completed, it means the blinding is successful. If you want to permanently shut down anti-virus software or EDR, you also need to use the taskkill command to end its process, and then delete the executable file corresponding to this process.
+**Tips:** If EDR marks these driver files, you can try to modify the hash value of the driver files without affecting the driver signature.
 
-**Trick:** If EDR marks these driver files, you can try to modify the hash value of the driver file without affecting the driver signature.
-
-**Note:** Currently, these two drivers cannot be loaded on the latest version of Win11 [10.0.22621.2506] (certificate revoked, Error: c0000603)
- 
-**Preview:** The third driver application will be released soon, supporting win7 - win11 (latest version).
 
 ## Effect
 The following demonstration content is not specific to this AV manufacturer, but is only for educational and research purposes. Most AV/EDR manufacturers are affected.
-
-***Tips:*** By executing the program directly, you can achieve all of the following effects.
 
 [DemoVideo](Demovideo.mp4)
 

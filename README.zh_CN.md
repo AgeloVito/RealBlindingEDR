@@ -1,10 +1,10 @@
 # RealBlindingEDR
 
+**2024.4.1 更新**
+
 利用带签名驱动的任意地址读/写实现：完全致盲、或杀死、或永久关闭 AV/EDR。
 
 如果你想了解实现原理可以参考分析文章：[AV/EDR 完全致盲 - 清除6大内核回调实现](https://mp.weixin.qq.com/s/ZMTjDMMdQoOczxzZ7OAGtA)    [欢迎关注此公众号]
-
-为了便于直接利用，发布此更新：
 
 **支持致盲/永久关闭：360 安全卫士、360 企业版、天擎V10、腾讯电脑管家、火绒/火绒企业版、卡巴斯基企业版、亚信EDR、Windows Defender、安天智甲**
 
@@ -44,33 +44,35 @@
 
 ## 使用方法
 
-![](assets/17025416387098.jpg)
+![](assets/17101195777762.jpg)
 
+从Releases 下载exe文件，并做好静态免杀处理。
 
-本项目支持两种驱动利用：[dbutil_2_3.sys](https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/)（支持win7及以上版本，但被杀软标记较多） 、[echo_driver.sys](https://www.loldrivers.io/drivers/afb8bb46-1d13-407d-9866-1daa7c82ca63/)（支持win10及以上版本）
+本项目当前支持4种驱动利用（对应相应的利用编号）：
+1. [echo_driver.sys](https://www.loldrivers.io/drivers/afb8bb46-1d13-407d-9866-1daa7c82ca63/)（支持 win10+）
+
+2. [dbutil_2_3.sys](https://www.loldrivers.io/drivers/a4eabc75-edf6-4b74-9a24-6a26187adabf/)（支持 win7+）
+
+3. wnBio.sys(支持 Windows Version 6.3+)
+
+4. [GPU-Z.sys](https://github.com/huoji120/Antivirus_R3_bypass_demo)(只支持 Windows Version 6.1)
+
+**例子：**
 
 1. 使用echo_driver.sys 驱动进行致盲:
 	
 	`RealBlindingEDR.exe c:\echo_driver.sys 1`
-	
-2. 使用dbutil_2_3.sys 驱动进行致盲:
-	
-	`RealBlindingEDR.exe c:\dbutil_2_3.sys 2`
 
-程序执行完成后，代表致盲成功。如果你想要永久关闭杀毒软件或EDR，还需要使用taskkill命令结束其进程，然后删除此进程对应的可执行文件。
+2. 使用wnBio.sys 驱动永久移除杀软（重命名杀软的关键文件）:
+	
+	`RealBlindingEDR.exe c:\wnBio.sys 3 clear`
+	![](assets/17101218451880.jpg)    
 
 **小技巧：** 如果EDR标记了这些驱动文件，你可以尝试在不影响驱动签名的情况下，修改驱动文件的hash值。
 
-**注意：** 目前这两个驱动在最新版Win11[10.0.22621.2506]上都已无法加载（证书被吊销,Error：c0000603）
  
-**预告：** 即将发布第三个驱动利用程序，支持win7 - win11（最新版）。
-      
-
-
 ## 效果
 下面演示内容并不针对此AV 厂商，仅出于教育研究目的，绝大多数AV/EDR 厂商都能达到同样的效果。
-
-***Tips:*** 直接执行程序，就可以实现以下所有效果。
 
 [演示视频](Demovideo.mp4)
 1. 删除AV/EDR 对象句柄监控，Kill AV进程
