@@ -10,7 +10,7 @@ If you want to understand the implementation principle, you can refer to the ana
 
 **Supports blinding/permanent shutdown: 360 Security Guard, 360 Enterprise Edition, Tianqing V10, Tencent Computer Manager, Tinder/Tinder Enterprise Edition, Kaspersky Endpoint Security, AsiaInfo EDR, Windows Defender, AnTian Zhijia.**
 
-**Note:** If you have other EDR products that need to be blinded, you can send me the installation package and I will implement it according to the situation.
+**Note:** If you have other EDR products that need to be blinded, you can send me the installation package and I will implement it according to the situation. （Mail: bXl6LnhjZ0BnbWFpbC5jb20=）
 
 **Currently tested on 64-bit Windows 7/10/11 and Windows Server 2008R2/2012R2/2016/2019/2022. If you find a problem in a certain version, you can report it through issue and I will adapt it.**
 
